@@ -1,0 +1,436 @@
+@font-face {
+  font-family: 'Bandeins-Strange';
+  src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/61488/BandeinsStrangeVariableGX.ttf') format('truetype');
+  font-stretch: 100% 800%;
+  font-weight: 200 800;
+  font-display: block;
+}
+
+:root {
+  --fontSize: 4;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 1000vh;
+  background: black;
+}
+
+.stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  z-index: 2;
+}
+
+.tube {
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
+  perspective: 100vw;
+}
+
+.tube__inner {
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  font-family: 'Bandeins-Strange';
+  font-size: calc(var(--fontSize) * 1vw);
+  font-stretch: 800%;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1;
+  transform-style: preserve-3d;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  transition: filter 0.5s ease;
+}
+
+
+/* Navigation Menu */
+.menu {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(0px);
+-webkit-backdrop-filter: blur(0px);
+  padding: 10px;
+  box-sizing: border-box;
+ 
+  position: fixed;
+  z-index: 1000;
+}
+
+.menu img {
+  padding-left: 25px;
+  padding-top: 10px;
+  width: 70px;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+}
+
+/* Navbar Links */
+.head {
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif; /* ✅ Ensures Poppins is applied */
+  font-size: 16px;
+  color: white;
+  margin: 0 20px;
+  font-size: 16px;
+}
+
+.head:hover {
+  border-bottom: 0.6mm solid rgb(7, 102, 197);
+  color: rgb(7, 102, 197);
+}
+
+/* 🔥 Updated Submenu Button */
+.right button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  /* 🟢 Button is always white */
+  background: rgba(255, 255, 255, 0);
+  border-radius: 16px;
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(2.3px);
+  color:white; /* 🔵 Text/icon remains black */
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Hover Effect */
+.right button:hover {
+  background: rgb(7, 102, 197);
+  color: white;
+}
+
+/* 🔥 Submenu Styling */
+.sub-menu {
+  position: absolute;
+  top: 55px;
+  right: 10px;
+  width: 200px;
+  height: fit-content;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: rgb(36, 36, 36);
+  border-radius: 16px;
+  box-shadow: rgba(0, 0, 0, 0.27) 0px 15px 38px,
+              rgba(0, 0, 0, 0.2) 0px 10px 12px;
+  backdrop-filter: blur(2.3px);
+  -webkit-backdrop-filter: blur(2.3px);
+  z-index: 9999; /* 🔴 Ensures submenu is always on top */
+  padding: 10px 0;
+}
+
+.option,
+.sub {
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  font-family: poppins;
+  color: white;
+  font-weight: 500;
+  padding: 10px 0;
+}
+
+.option:hover,
+.sub:hover {
+  background: white;
+  color: rgb(1, 42, 84);
+}
+
+/* Show sub-menu on hover */
+.right button:hover + .sub-menu,
+.sub-menu:hover {
+  display: flex;
+}
+
+/* Mobile Responsive */
+@media only screen and (max-width: 450px) {
+  .head {
+    display: none;
+  }
+  .sub {
+    display: block;
+  }
+}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+/* Navbar Links */
+.head {
+  font-family: 'Poppins', sans-serif; /* ✅ Ensures Poppins is applied */
+  font-size: 16px;
+  color: white;
+  margin: 0 20px;
+}
+
+.head:hover {
+  border-bottom: 0.6mm solid rgb(7, 102, 197);
+  color: rgb(7, 102, 197);
+}
+
+/* Submenu Options */
+.option,
+.sub {
+  font-family: 'Poppins', sans-serif; /* ✅ Poppins applied here too */
+  font-weight: 500;
+  padding: 10px 0;
+}
+
+/* 🔥 Video Background */
+.video {
+  position: relative; /* Keeps video inside the glass container */
+  width: 100%;
+  max-height: 300px; /* Adjust height if needed */
+  object-fit: cover; /* Ensures it scales properly */
+  border-radius: 16px; /* Matches glass container style */
+  margin-bottom: 10px; /* Adds spacing between video and text */
+}
+
+.background-video {
+  position: static;
+  border-radius: 16px;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 70%;
+  opacity: 1;
+  object-fit: cover;
+  z-index: -1;
+}
+.glass {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 50% text, 50% video */
+  align-items: center;
+  margin-top: -50px;
+  margin-bottom: -120px;
+  width: 2000px;
+  height: 100%;
+  gap: 20px;
+  position: fixed;
+  bottom: 100vh; /* Fully hidden initially */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150vw;
+  height:90vh;
+  max-height: 90vh;
+  padding: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-y:auto; /* Enables scrolling inside */
+
+ 
+  background: rgba(255, 255, 255, 0);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  transition: bottom 0.6s ease-in-out, opacity 0.6s ease-in-out;
+  z-index: 2;
+  opacity: ; /* Initially hidden */
+  pointer-events: none; /* Prevents interaction when hidden */
+}
+
+
+
+
+/* Adjust for better visibility */
+@media (max-width: 768px) {
+  .glass {
+    grid-template-columns: 1fr; /* Full width on small screens */
+    text-align: center;
+  }
+
+  .background-video {
+    order: 2; /* Moves video between heading and text */
+    width: 100%;
+    max-height: 200px; /* Adjusted height for mobile */
+  }
+
+  .text-content {
+    order: 3; /* Text comes after the video */
+    text-align: center;
+  }
+}
+
+
+/* Hide scrollbar for Firefox */
+
+.glass {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: fixed;
+  bottom: -100vh; /* Initially hidden */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90vw;
+  max-width: 1800px;
+  height: auto; /* ✅ Expands based on content */
+  min-height: 50vh; /* Ensures a visible start */
+  padding: 2rem;
+  ;
+  
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+
+  transition: bottom 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  z-index: 2;
+  opacity: 0; /* Initially hidden */
+  pointer-events: none; /* Prevents interaction when hidden */
+}
+
+/* 🔹 Remove Scrollbar */
+
+
+.glass {
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+}
+
+/* 🔹 Adjust Glass Container Height Dynamically */
+.glass-content {
+  width: 100%;
+  max-width: 1000px;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  color: white;
+}
+
+/* 🔹 Mobile Responsive */
+@media (max-width: 768px) {
+  .glass {
+    text-align: center;
+    padding: 1.5rem;
+  }
+}
+/*scroll-driven */
+.h1{
+  font-family: 'Poppins', sans-serif;
+}
+/* ...existing code... */
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 images per row */
+  gap: 50px;
+  margin-top: 20px;
+}
+
+.image-grid img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover; /* Ensures images cover the grid cell */
+}
+
+/* Add text at the bottom of the image */
+.image-grid .image-container {
+  position: relative;
+}
+
+.image-grid .image-container img {
+  display: block;
+}
+
+.image-grid .image-container .caption {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  text-align: center;
+}
+/* ...existing code... */
+
+.image-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.image-container img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.image-container:hover img {
+  transform: scale(1.1);
+}
+
+.image-container .caption {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  text-align: center;
+}
